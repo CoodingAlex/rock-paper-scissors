@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "../assets/styles/Options.css";
+import "../assets/styles/OptionsPlus.css";
 import "../assets/styles/Game.css";
 import Option from "./Option";
 import GameOption from "./GameOption";
-
-const Options = (props) => {
+const OptionsPlus = (props) => {
   if (props.isPlaying) {
     return (
       <div className="Game">
@@ -33,28 +32,15 @@ const Options = (props) => {
   }
   return (
     <div className="Options">
-      <div className="Options__Container">
-        <Option option="Paper" onClick={props.setOption} />
-        <Option option="Rock" onClick={props.setOption} />
-        <Option option="Scissors" onClick={props.setOption} />
+      <div className="Options__Container__Plus">
+        <Option option="Spock" onClick={props.setOption} plus={true} />
+        <Option option="Rock" onClick={props.setOption} plus={true} />
+        <Option option="Scissors" onClick={props.setOption} plus={true} />
+        <Option option="Paper" onClick={props.setOption} plus={true} />
+        <Option option="Lizard" onClick={props.setOption} plus={true} />
       </div>
     </div>
   );
 };
 
-export default Options;
-
-// function changeToGameMode(event) {
-//   if (event.target.id == "Paper") {
-//     removeNoSelectedOptions("Paper", "Scissors", "Rock");
-//     translateToGame("Paper");
-//   }
-//   if (event.target.id == "Scissors") {
-//     removeNoSelectedOptions("Scissors", "Paper", "Rock");
-//     translateToGame("Scissors");
-//   }
-//   if (event.target.id == "Rock") {
-//     removeNoSelectedOptions("Rock", "Scissors", "Paper");
-//     translateToGame("Rock");
-//   }
-// }
+export default OptionsPlus;

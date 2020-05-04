@@ -1,0 +1,86 @@
+/* containers things */
+.Options__Container__Plus {
+  padding-right: 120px;
+  display: grid;
+  background-image: url("../img/bg-pentagon.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  grid-template-columns: 150px 150px 150px;
+  grid-template-rows: 200px 200px 20px;
+  column-gap: 0px;
+}
+.Option__Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Option__Container__Plus {
+  background: white;
+  height: 110px;
+  width: 110px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border: solid 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Option__Container__Plus:hover {
+  height: 130px;
+  width: 130px;
+}
+.Option__Container__Plus img {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.Scissors__Container__Plus {
+  grid-column: 2;
+  margin-left: 60px;
+  align-self: stretch;
+}
+.Paper__Container__Plus {
+  grid-column: 3;
+  margin-top: 80px;
+  margin-left: 70px;
+}
+.Spock__Container__Plus {
+  grid-column: 1;
+  margin-top: 80px;
+  margin-left: 60px;
+}
+.Rock__Container__Plus {
+  grid-row: 2;
+  grid-column: 1;
+  margin-top: 80px;
+  margin-left: 90px;
+}
+.Lizard__Container__Plus {
+  grid-row: 2;
+  grid-column: 3;
+  margin-top: 80px;
+  margin-right: 90px;
+}
+/* making it cool B */
+.Paper__Border {
+  border-color: hsl(230, 89%, 62%);
+}
+.Scissors__Border {
+  border-color: hsl(39, 89%, 49%);
+}
+.Rock__Border {
+  border-color: hsl(349, 71%, 52%);
+}
+.Spock__Border {
+  border-color: hsl(189, 59%, 53%);
+}
+.Lizard__Border {
+  border-color: hsl(261, 73%, 60%);
+}
+
+.Options__Container__Plus img {
+  height: 60px;
+  max-width: 120px;
+}
