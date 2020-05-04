@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../assets/img/logo.svg";
 import "../assets/styles/Header.css";
-const Header = () => {
+const Header = (props) => {
   return (
     <div className="Header">
       <div className="Header__Container">
@@ -10,7 +10,7 @@ const Header = () => {
         </div>
         <div className="Header__Score">
           <h2>Score</h2>
-          <h1>12</h1>
+          <h1>{props.score}</h1>
         </div>
       </div>
     </div>

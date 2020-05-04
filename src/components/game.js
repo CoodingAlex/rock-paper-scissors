@@ -33,8 +33,6 @@ function getWinner(userOption, computerOption) {
       if (computerOption == "Rock") return "Tie";
       break;
     default:
-      console.log(userOption);
-      console.log(computerOption);
       break;
   }
 }

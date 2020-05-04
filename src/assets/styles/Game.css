@@ -21,6 +21,8 @@
 .Computer__Option {
   grid-row: 2;
   grid-column: 3;
+  animation: transparent;
+  animation-duration: 3s;
 }
 .Winner__Phrase {
   grid-column: 2;
@@ -28,6 +30,8 @@
   justify-self: center;
   align-self: center;
   margin-bottom: 150px;
+  animation: transparent;
+  animation-duration: 3s;
 }
 .Winner__Phrase {
   color: white;
@@ -77,4 +81,13 @@
 }
 .Rock__Border {
   border-color: hsl(349, 71%, 52%);
+}
+
+@keyframes transparent {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
 }

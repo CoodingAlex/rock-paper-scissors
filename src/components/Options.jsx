@@ -3,40 +3,29 @@ import "../assets/styles/Options.css";
 import "../assets/styles/Game.css";
 import Option from "./Option";
 import GameOption from "./GameOption";
-import Game from "./game";
-const Options = () => {
-  useEffect(() => {
-    setWinner(Game.getWinner(userOption, computerOption));
-    if (winner == "Tie") setWinnerPhrase("This is a Tie");
-    if (winner == "User") setWinnerPhrase("You Win");
-    if (winner == "Computer") setWinnerPhrase("You Lose");
-  });
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [userOption, setUserOption] = useState("");
-  const [computerOption, setComputerOption] = useState("");
-  const [winner, setWinner] = useState("");
-  const [winnerPhrase, setWinnerPhrase] = useState("");
-  function setOption(event) {
-    setUserOption(event.target.id);
-    setComputerOption(Game.getRandomOption());
-    setIsPlaying(true);
-  }
-  if (isPlaying) {
+const Options = (props) => {
+  if (props.isPlaying) {
     return (
       <div className="Game">
         <div className="Game__Container">
-          <GameOption option={userOption} typeOption="User"></GameOption>
-          <p className="Winner__Phrase">{winnerPhrase}</p>
+          <GameOption option={props.userOption} typeOption="User"></GameOption>
+          <p className="Winner__Phrase">{props.winnerPhrase}</p>
           <button
-            onClick={() => setIsPlaying(false)}
+            onClick={() => {
+              props.setIsPlaying(false);
+              console.log(props.score);
+
+              if (props.winner == "User") {
+                props.setScore(props.score + 1);
+                console.log(props.score);
+              }
+            }}
             className="Play__Again__Button"
           >
             play Again
           </button>
-          <GameOption
-            option={computerOption}
-            typeOption="Computer"
-          ></GameOption>
+
+          <GameOption option={props.computerOption} typeOption="Computer" />
         </div>
       </div>
     );
@@ -44,9 +33,9 @@ const Options = () => {
   return (
     <div className="Options">
       <div className="Options__Container">
-        <Option option="Paper" onClick={setOption} />
-        <Option option="Rock" onClick={setOption} />
-        <Option option="Scissors" onClick={setOption} />
+        <Option option="Paper" onClick={props.setOption} />
+        <Option option="Rock" onClick={props.setOption} />
+        <Option option="Scissors" onClick={props.setOption} />
       </div>
     </div>
   );
