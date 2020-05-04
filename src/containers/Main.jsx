@@ -35,7 +35,6 @@ const Main = (props) => {
   }
 
   function changePlus() {
-    console.log(isPlus);
     setIsPlus(!isPlus);
   }
   return (
