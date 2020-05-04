@@ -35,6 +35,7 @@ const Main = (props) => {
   }
 
   function changePlus() {
+    console.log(isPlus);
     setIsPlus(!isPlus);
   }
   return (
@@ -42,7 +43,7 @@ const Main = (props) => {
       <div className="Main__Container">
         <div className="Main__Header">
           <div className="Main__Header__Container">
-            <Header score={score} />
+            <Header score={score} isPlus={isPlus} />
           </div>
           <div className="switch__button">
             <h2>

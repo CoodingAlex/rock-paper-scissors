@@ -1,7 +1,14 @@
 import React from "react";
-import logo from "../assets/img/logo.svg";
+import normalLogo from "../assets/img/logo.svg";
+import bonusLogo from "../assets/img/logo-bonus.svg";
 import "../assets/styles/Header.css";
 const Header = (props) => {
+  let logo;
+  if (props.isPlus == false) {
+    logo = normalLogo;
+  } else {
+    logo = bonusLogo;
+  }
   return (
     <div className="Header">
       <div className="Header__Container">
