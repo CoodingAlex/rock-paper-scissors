@@ -1,0 +1,80 @@
+/*Game page*/
+@import url("https://fonts.google.com/specimen/Barlow+Semi+Condensed");
+.No_Selected {
+  display: none;
+}
+
+.Game__Container {
+  margin-top: 40px;
+  background: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 50px 300px;
+  width: 800px;
+}
+
+.User__Option {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.Computer__Option {
+  grid-row: 2;
+  grid-column: 3;
+}
+.Winner__Phrase {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: center;
+  align-self: center;
+  margin-bottom: 150px;
+}
+.Winner__Phrase {
+  color: white;
+  font-size: 3rem;
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-weight: bold;
+}
+.Play__Again__Button {
+  grid-column: 2;
+  grid-row: 2;
+  height: 40px;
+  width: 180px;
+  justify-self: center;
+  align-self: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-weight: 700;
+  border-radius: 5px;
+  border: transparent;
+}
+.Play__Again__Button:hover {
+  color: red;
+}
+.Option__Game__Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  height: 170px;
+  width: 170px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border: solid 20px;
+  border-radius: 50%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.Paper__Border {
+  border-color: hsl(230, 89%, 62%);
+}
+.Scissors__Border {
+  border-color: hsl(39, 89%, 49%);
+}
+.Rock__Border {
+  border-color: hsl(349, 71%, 52%);
+}

@@ -1,0 +1,57 @@
+/* containers things */
+.Options__Container {
+  padding-right: 120px;
+  display: grid;
+  background-image: url("../img/bg-triangle.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  grid-template-columns: 150px 150px 150px;
+  grid-template-rows: 200px 200px 20px;
+  column-gap: 0px;
+}
+.Option__Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Option__Container {
+  background: white;
+  height: 170px;
+  width: 170px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border: solid 20px;
+  border-radius: 50%;
+}
+.Option__Container:hover {
+  height: 180px;
+  width: 180px;
+}
+.Option__Container img {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.Scissors__Container {
+  grid-column: 3;
+}
+.Rock__Container {
+  grid-row: 2;
+  grid-column: 2;
+}
+/* making it cool B */
+.Paper__Border {
+  border-color: hsl(230, 89%, 62%);
+}
+.Scissors__Border {
+  border-color: hsl(39, 89%, 49%);
+}
+.Rock__Border {
+  border-color: hsl(349, 71%, 52%);
+}
+
+.Options__Container img {
+  height: 70px;
+  max-width: 120px;
+}
