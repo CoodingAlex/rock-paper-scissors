@@ -6,7 +6,6 @@ function getRandomOption(mode = "normal") {
   if (mode == "bonus") {
     option = Math.floor(Math.random() * (6 - 1) + 1);
   }
-  console.log(option);
 
   switch (option) {
     case 1:

@@ -14,11 +14,16 @@ const Options = (props) => {
           <button
             onClick={() => {
               props.setIsPlaying(false);
-              console.log(props.score);
+              console.log(props.winner);
 
               if (props.winner == "User") {
                 props.setScore(props.score + 1);
-                console.log(props.score);
+              }
+              if (props.winner == "Tie") {
+                props.setTied(props.tied + 1);
+              }
+              if (props.winner == "Computer") {
+                props.setLosed(props.losed + 1);
               }
             }}
             className="Play__Again__Button"

@@ -1,0 +1,11 @@
+.ModalDashboard {
+  width: 200px;
+}
+.ModalDashboard__Title h1 {
+  font-family: "Barlow Semi Condensed";
+}
+.ModalDashboard__Content__Item p {
+  font-family: "Barlow Semi Condensed";
+  font-size: 20px;
+  font-weight: bold;
+}

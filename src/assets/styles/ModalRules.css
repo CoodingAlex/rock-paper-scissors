@@ -1,0 +1,14 @@
+.ModalRules__Title {
+  font-family: "Barlow Semi Condensed";
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.ModalRules__img {
+  border-radius: 7px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+:focus {
+  outline-color: transparent;
+  outline-style: none;
+}

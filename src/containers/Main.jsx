@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-
+import ModalRules from "../components/ModalRules";
+import ModalDashboard from "../components/ModalDashboard";
 import Header from "../components/Header";
 import Options from "../components/Options";
 import OptionsPlus from "../components/OptionsPlus";
@@ -22,7 +23,11 @@ const Main = (props) => {
   const [winner, setWinner] = useState("");
   const [winnerPhrase, setWinnerPhrase] = useState("");
   const [score, setScore] = useState(0);
+  const [losed, setLosed] = useState(0);
+  const [tied, setTied] = useState(0);
   const [isPlus, setIsPlus] = useState(false);
+  const [isModalRules, setIsModalRules] = useState(false);
+  const [isModalDashBoard, setIsModalDashBoard] = useState(false);
 
   function setOption(event) {
     setUserOption(event.target.id);
@@ -33,12 +38,30 @@ const Main = (props) => {
     }
     setIsPlaying(true);
   }
-
+  function openModalRules() {
+    setIsModalRules(!isModalRules);
+  }
+  function openModalDashBoard() {
+    setIsModalDashBoard(!isModalDashBoard);
+  }
   function changePlus() {
     setIsPlus(!isPlus);
   }
   return (
     <div className="Main">
+      <ModalDashboard
+        isOpen={isModalDashBoard}
+        onClose={openModalDashBoard}
+        isPlus={isPlus}
+        winned={score}
+        losed={losed}
+        tied={tied}
+      />
+      <ModalRules
+        isOpen={isModalRules}
+        onClose={openModalRules}
+        isPlus={isPlus}
+      />
       <div className="Main__Container">
         <div className="Main__Header">
           <div className="Main__Header__Container">
@@ -64,6 +87,10 @@ const Main = (props) => {
                 setScore={setScore}
                 score={score}
                 winner={winner}
+                setLosed={setLosed}
+                setTied={setTied}
+                tied={tied}
+                losed={losed}
               />
             )}
             {!isPlus && (
@@ -77,9 +104,21 @@ const Main = (props) => {
                 setScore={setScore}
                 score={score}
                 winner={winner}
+                setLosed={setLosed}
+                setTied={setTied}
+                tied={tied}
+                losed={losed}
               />
             )}
           </div>
+        </div>
+        <div className="Main__Footer">
+          <button onClick={openModalDashBoard} className="Dashboard__Button">
+            Dashboard
+          </button>
+          <button onClick={openModalRules} className="Rules__Button">
+            Rules
+          </button>
         </div>
       </div>
     </div>
