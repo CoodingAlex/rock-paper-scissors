@@ -29,7 +29,7 @@ const GameOption = (props) => {
     <figure
       className={`Option__Game__Container ${props.option}__Border ${props.typeOption}__Option`}
     >
-      <img src={icon} alt="" id={props.option} />
+      <img src={icon} alt="Waiting for the player" id={props.option} />
     </figure>
   );
 };

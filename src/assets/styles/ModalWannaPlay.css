@@ -1,0 +1,20 @@
+.Button__WannaPlay {
+  height: 35px;
+  width: 80px;
+  font-family: "Barlow Semi Condensed";
+  font-weight: 700;
+  font-size: 15px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+.Button__Accept {
+  background-color: #19d169;
+}
+.Button__Reject {
+  background-color: #f13e41;
+}
+.ModalWannaPlay__Buttons {
+  display: flex;
+  justify-content: space-evenly;
+}

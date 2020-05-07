@@ -14,7 +14,6 @@ const Options = (props) => {
           <button
             onClick={() => {
               props.setIsPlaying(false);
-              console.log(props.winner);
 
               if (props.winner == "User") {
                 props.setScore(props.score + 1);
@@ -30,8 +29,10 @@ const Options = (props) => {
           >
             play Again
           </button>
-
-          <GameOption option={props.computerOption} typeOption="Computer" />
+          {!props.computerOption && <GameOption typeOption="Computer" />}
+          {props.computerOption && (
+            <GameOption option={props.computerOption} typeOption="Computer" />
+          )}
         </div>
       </div>
     );

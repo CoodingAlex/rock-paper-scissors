@@ -1,0 +1,18 @@
+p,
+h2 {
+  font-family: "Barlow Semi Condensed";
+}
+.PlayWith {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.PlayWith__Button {
+  font-family: "Barlow Semi Condensed";
+  font-size: 15px;
+  font-weight: bold;
+  max-height: 30px;
+  background: transparent;
+  border: solid 1px yellowgreen;
+  border-radius: 5px;
+}

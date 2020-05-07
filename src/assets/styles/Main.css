@@ -1,8 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed&display=swap");
+button {
+  cursor: pointer;
+}
 
 .body {
   font-family: "Barlow Semi Condensed";
 }
+.Main__Options {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .Main__Container {
   display: flex;
   flex-direction: column;
@@ -23,7 +32,7 @@
 .Main__Footer {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .Main__Footer button {
   font-family: "Barlow Semi Condensed";

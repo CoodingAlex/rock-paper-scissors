@@ -1,0 +1,33 @@
+p,
+h2 {
+  font-family: "Barlow Semi Condensed";
+}
+.ModalOnline__Title {
+  font-weight: 900;
+  font-size: 20px;
+}
+.ModalOnline {
+  width: 300px;
+}
+.ModalOnline__Users__Container {
+  margin-top: 40px;
+  width: 200px;
+  font-size: 18px;
+}
+
+.ModalOnline__Login input {
+  width: 100%;
+  height: 30px;
+  border: solid transparent;
+}
+.ModalOnline__Login button {
+  margin-top: 5px;
+  background: transparent;
+  border: 1px solid yellowgreen;
+  height: 30px;
+  width: 90px;
+  border-radius: 5px;
+}
+.Login__Message {
+  color: red;
+}
