@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import ModalRules from "../components/ModalRules";
 import ModalDashboard from "../components/ModalDashboard";
 import ModalOnline from "../components/ModalOnline";
@@ -7,31 +8,31 @@ import Header from "../components/Header";
 import Options from "../components/Options";
 import OptionsPlus from "../components/OptionsPlus";
 import Game from "../components/game";
-import switchButton from "../components/SwitchButton";
-import socketIOClient from "socket.io-client";
 import "../assets/styles/Main.css";
 import SwitchButton from "../components/SwitchButton";
-const ENDPOINT = "http://192.168.0.19:3001/";
-const socket = socketIOClient(ENDPOINT);
-const Main = (props) => {
+
+const Main = ({
+  isPlaying,
+  userOption,
+  computerOption,
+  winner,
+  winnerPhrase,
+  score,
+  losed,
+  tied,
+  isPlus,
+  isModalRules,
+  isModalDashBoard,
+  isModalOnline,
+  isModalWannaPlay,
+  isLogged,
+  usersOnline,
+  userFrom,
+  isPlayingOnline,
+}) => {
+  const { socket } = props;
   //Hooks
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [userOption, setUserOption] = useState("");
-  const [computerOption, setComputerOption] = useState("");
-  const [winner, setWinner] = useState("");
-  const [winnerPhrase, setWinnerPhrase] = useState("");
-  const [score, setScore] = useState(0);
-  const [losed, setLosed] = useState(0);
-  const [tied, setTied] = useState(0);
-  const [isPlus, setIsPlus] = useState(false);
-  const [isModalRules, setIsModalRules] = useState(false);
-  const [isModalDashBoard, setIsModalDashBoard] = useState(false);
-  const [isModalOnline, setIsModalOnline] = useState(false);
-  const [isModalWannaPlay, setIsModalWannaPlay] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
-  const [usersOnline, setUsersOnline] = useState({ you: "", users: [] });
-  const [userFrom, setUserFrom] = useState({ username: "", id: "" });
-  const [isPlayingOnline, setIsPlayingOnline] = useState(false);
+
   useEffect(() => {
     console.log("MAIN:18", usersOnline);
 
@@ -75,7 +76,6 @@ const Main = (props) => {
     socket.emit("playing:option", { option: event.target.id, id: socket.id });
     setIsPlaying(true);
   }
-
   function setOption(event) {
     setUserOption(event.target.id);
     if (isPlus) {
@@ -85,6 +85,7 @@ const Main = (props) => {
     }
     setIsPlaying(true);
   }
+
   function openModalRules() {
     setIsModalRules(!isModalRules);
   }
@@ -217,4 +218,25 @@ const Main = (props) => {
   );
 };
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {
+    isPlaying: state.isPlaying,
+    userOption: state.userOption,
+    computerOption: state.computerOption,
+    winner: state.winner,
+    winnerPhrase: state.winnerPhrase,
+    score: state.score,
+    losed: state.losed,
+    tied: state.tied,
+    isPlus: state.isPlus,
+    isModalRules: state.isModalRules,
+    isModalDashBoard: state.isModalDashBoard,
+    isModalOnline: state.isModalOnline,
+    isModalWannaPlay: state.isModalWannaPlay,
+    isLogged: state.isLogged,
+    usersOnline: state.usersOnline,
+    userFrom: state.userFrom,
+    isPlayingOnline: state.isPlayingOnline,
+  };
+};
+export default connect(mapStateToProps, null)(Main);
