@@ -1,45 +1,31 @@
 import React, { useEffect } from "react";
 import Modal from "./Modal";
+import { setUsersOnline, setYou } from "../actions";
+import { connect } from "react-redux";
+
 import "../assets/styles/ModalOnline.css";
 import PlayWith from "./PlayWith";
 const ModalOnline = (props) => {
-  let you = props.usersOnline.you;
-  useEffect(() => {
-    props.socket.on("connectedUsers", (users) => {
-      console.log("connected users");
+  useEffect(() => {});
 
-      props.setUsersOnline({
-        you: "",
-        users: [...users],
-      });
-    });
+  useEffect(() => {
     props.socket.on("userDisconnected", (users) => {
-      users = users.filter((user) => props.usersOnline.you !== user.username);
-      props.setUsersOnline({
-        you: props.usersOnline.you || "",
-        users: [...users],
-      });
+      users = users.filter((user) => user.id != props.socket.id);
+      props.setUsersOnline(users);
     });
   }, []);
   useEffect(() => {
-    return () => {
-      props.socket.on("newUserConected", (user) => {
-        console.log("new user");
-        console.log(user);
-        console.log(props.usersOnline);
-
-        props.setUsersOnline({
-          you: props.usersOnline.you || "",
-          users: props.usersOnline.users.concat(user),
-        });
-      });
-    };
-  }, [props.usersOnline]);
+    props.socket.on("newUserConected", (users) => {
+      users = users.filter((user) => user.id != props.socket.id);
+      props.setUsersOnline(users);
+    });
+  }, []);
   function login() {
     const usernameInput = document.getElementById("username");
     const login_message = document.querySelector(".Login__Message");
     let username = usernameInput.value;
-    const comparativeUsername = props.usersOnline.users.filter(
+
+    const comparativeUsername = props.usersOnline.filter(
       (user) => user.username === username
     );
 
@@ -50,10 +36,7 @@ const ModalOnline = (props) => {
     if (username !== "") {
       props.socket.emit("login", username);
       props.setIsLogged(true);
-      props.setUsersOnline({
-        you: username,
-        users: [...props.usersOnline.users],
-      });
+      props.setYou(username);
     } else {
       login_message.innerHTML = "Please, put a username";
       props.setIsLogged(false);
@@ -62,7 +45,7 @@ const ModalOnline = (props) => {
 
   if (!props.isLogged) {
     return (
-      <Modal isOpen={props.isOpen} onClose={props.onClose}>
+      <Modal isOpen={props.isModalOnline} onClose={props.onClose}>
         <div className="ModalOnline">
           <div className="ModalOnline__Container">
             <div className="ModalOnline__Title">
@@ -80,7 +63,7 @@ const ModalOnline = (props) => {
   }
   if (props.isLogged) {
     return (
-      <Modal isOpen={props.isOpen} onClose={props.onClose}>
+      <Modal isOpen={props.isModalOnline} onClose={props.onClose}>
         <div className="ModalOnline">
           <div className="ModalOnline__Container">
             <div className="ModalOnline__Title">
@@ -88,8 +71,11 @@ const ModalOnline = (props) => {
             </div>
             <div className="ModalOnline__Users">
               <div className="ModalOnline__Users__Container">
-                <p>(You) {props.usersOnline.you}</p>
-                {props.usersOnline.users.map((user) => {
+                <p>(You) {props.you}</p>
+                {props.usersOnline.map((user) => {
+                  if (user == 0) {
+                    return null;
+                  }
                   return (
                     <PlayWith
                       username={user.username}
@@ -107,5 +93,17 @@ const ModalOnline = (props) => {
     );
   }
 };
+const mapStateToProps = (state) => {
+  return {
+    isModalOnline: state.isModalOnline,
+    usersOnline: state.usersOnline,
+    isLogged: state.isLogged,
+    you: state.you,
+  };
+};
+const mapDispatchToProps = {
+  setUsersOnline,
+  setYou,
+};
 
-export default ModalOnline;
+export default connect(mapStateToProps, mapDispatchToProps)(ModalOnline);

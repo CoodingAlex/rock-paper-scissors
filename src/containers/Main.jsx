@@ -1,5 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import {
+  setWinner,
+  setWinnerPhrase,
+  setUserFrom,
+  setIsModalOnline,
+  setIsModalWannaPlay,
+  setIsPlayingOnline,
+  setComputerOption,
+  setUserOption,
+  setIsPlaying,
+  setIsModalRules,
+  setIsModalDashBoard,
+  setIsPlus,
+  setIsLogged,
+  setUsersOnline,
+  setLosed,
+  setTied,
+  setScore,
+  setRoom,
+} from "../actions";
 import ModalRules from "../components/ModalRules";
 import ModalDashboard from "../components/ModalDashboard";
 import ModalOnline from "../components/ModalOnline";
@@ -28,26 +48,43 @@ const Main = ({
   isLogged,
   usersOnline,
   userFrom,
+  room,
   isPlayingOnline,
+  socket,
+  setWinner,
+  setWinnerPhrase,
+  setUserFrom,
+  setIsModalOnline,
+  setIsModalWannaPlay,
+  setIsPlayingOnline,
+  setComputerOption,
+  setUserOption,
+  setIsPlaying,
+  setIsModalRules,
+  setIsModalDashBoard,
+  setIsPlus,
+  setIsLogged,
+  setUsersOnline,
+  setLosed,
+  setTied,
+  setScore,
+  setRoom,
 }) => {
-  const { socket } = props;
   //Hooks
 
   useEffect(() => {
-    console.log("MAIN:18", usersOnline);
-
     setWinner(Game.getWinner(userOption, computerOption));
     if (winner == "Tie") setWinnerPhrase("This is a Tie");
     if (winner == "User") setWinnerPhrase("You Win");
 
     if (winner == "Computer") setWinnerPhrase("You Lose");
+    console.log(isPlayingOnline);
   });
   useEffect(() => {
-    socket.on("invitation", (userFromId) => {
-      let userFromInvitation = usersOnline.users.filter(
-        (user) => user.id == userFromId
-      );
-      setUserFrom(userFromInvitation[0]);
+    socket.on("invitation", (userFrom) => {
+      setUserFrom({
+        ...userFrom,
+      });
 
       openModalWannaPlay();
     });
@@ -56,24 +93,26 @@ const Main = ({
       setIsModalWannaPlay(false);
 
       setIsPlayingOnline(true);
+      setRoom(roomname);
+
       setComputerOption("");
     });
-    socket.on("final:options", (finalOptions) => {
-      let rivalOption = finalOptions.filter(
-        (option) => option.id !== socket.id
-      );
-      rivalOption = rivalOption[0];
-      console.log(rivalOption);
-
+    socket.on("rival:option", (rivalOption) => {
       setComputerOption(rivalOption.option);
-      setIsPlayingOnline(false);
+      if (userOption) {
+        setIsPlayingOnline(false);
+      }
     });
   }, []);
 
   //////////////////////////
   async function getUserOption(event) {
     setUserOption(event.target.id);
-    socket.emit("playing:option", { option: event.target.id, id: socket.id });
+    socket.emit("playing:option", {
+      option: event.target.id,
+      id: socket.id,
+    });
+
     setIsPlaying(true);
   }
   function setOption(event) {
@@ -104,7 +143,6 @@ const Main = ({
   return (
     <div className="Main">
       <ModalDashboard
-        isOpen={isModalDashBoard}
         onClose={openModalDashBoard}
         isPlus={isPlus}
         winned={score}
@@ -118,8 +156,6 @@ const Main = ({
         isLogged={isLogged}
         setIsLogged={setIsLogged}
         socket={socket}
-        usersOnline={usersOnline}
-        setUsersOnline={setUsersOnline}
       />
       <ModalRules
         isOpen={isModalRules}
@@ -130,7 +166,6 @@ const Main = ({
         isOpen={isModalWannaPlay}
         onClose={openModalWannaPlay}
         isPlus={isPlus}
-        userFrom={userFrom}
         socket={socket}
       />
       <div className="Main__Container">
@@ -165,7 +200,23 @@ const Main = ({
                 losed={losed}
               />
             )}
-            {/* /////////////////////////////// */}
+            {isPlus && isPlayingOnline && (
+              <OptionsPlus
+                setOption={getUserOption}
+                userOption={userOption}
+                winnerPhrase={winnerPhrase}
+                computerOption={computerOption}
+                isPlaying={isPlaying}
+                setIsPlaying={setIsPlaying}
+                setScore={setScore}
+                score={score}
+                winner={winner}
+                setLosed={setLosed}
+                setTied={setTied}
+                tied={tied}
+                losed={losed}
+              />
+            )}
             {isPlus && !isPlayingOnline && (
               <OptionsPlus
                 setOption={setOption}
@@ -183,6 +234,7 @@ const Main = ({
                 losed={losed}
               />
             )}
+            {/* /////////////////////////////// */}
             {!isPlus && !isPlayingOnline && (
               <Options
                 setOption={setOption}
@@ -231,12 +283,36 @@ const mapStateToProps = (state) => {
     isPlus: state.isPlus,
     isModalRules: state.isModalRules,
     isModalDashBoard: state.isModalDashBoard,
+
     isModalOnline: state.isModalOnline,
     isModalWannaPlay: state.isModalWannaPlay,
     isLogged: state.isLogged,
     usersOnline: state.usersOnline,
     userFrom: state.userFrom,
     isPlayingOnline: state.isPlayingOnline,
+    room: state.room,
   };
 };
-export default connect(mapStateToProps, null)(Main);
+
+const mapDispatchToProps = {
+  setWinner,
+  setWinnerPhrase,
+  setUserFrom,
+  setIsModalOnline,
+  setIsModalWannaPlay,
+  setIsPlayingOnline,
+  setComputerOption,
+  setUserOption,
+  setIsPlaying,
+
+  setIsModalRules,
+  setIsModalDashBoard,
+  setIsPlus,
+  setIsLogged,
+  setUsersOnline,
+  setLosed,
+  setTied,
+  setScore,
+  setRoom,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

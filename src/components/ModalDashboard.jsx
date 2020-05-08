@@ -1,10 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import Modal from "./Modal";
 import "../assets/styles/ModalDashboard.css";
 
 const ModalDashboard = (props) => {
   return (
-    <Modal isOpen={props.isOpen} onClose={props.onClose}>
+    <Modal isOpen={props.isModalDashBoard} onClose={props.onClose}>
       <div className="ModalDashboard">
         <div className="ModalDashboard__Container">
           <div className="ModalDashboard__Title">
@@ -28,5 +30,10 @@ const ModalDashboard = (props) => {
     </Modal>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    isModalDashBoard: state.isModalDashBoard,
+  };
+};
 
-export default ModalDashboard;
+export default connect(mapStateToProps, null)(ModalDashboard);

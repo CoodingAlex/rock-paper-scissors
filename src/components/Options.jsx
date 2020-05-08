@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { setIsPlayingOnline } from "../actions";
 import "../assets/styles/Options.css";
 import "../assets/styles/Game.css";
 import Option from "./Option";
@@ -24,6 +26,7 @@ const Options = (props) => {
               if (props.winner == "Computer") {
                 props.setLosed(props.losed + 1);
               }
+              props.setIsPlayingOnline(false);
             }}
             className="Play__Again__Button"
           >
@@ -47,8 +50,10 @@ const Options = (props) => {
     </div>
   );
 };
-
-export default Options;
+const mapDispatchToProps = {
+  setIsPlayingOnline,
+};
+export default connect(null, mapDispatchToProps)(Options);
 
 // function changeToGameMode(event) {
 //   if (event.target.id == "Paper") {

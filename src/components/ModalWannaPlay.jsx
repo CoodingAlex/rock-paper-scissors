@@ -1,13 +1,17 @@
 import React from "react";
 import Modal from "./Modal";
+import { connect } from "react-redux";
+import { setIsModalWannaPlay, setIsModalOnline } from "../actions";
+
 import "../assets/styles/ModalWannaPlay.css";
 
 const ModalWannaPlay = (props) => {
   let username = props.userFrom ? props.userFrom.username : "";
-  let id = props.userFrom ? props.userFrom.id : "";
+
   function acceptInvitation() {
-    props.socket.emit("accept:invitation", id);
-    props.onClose();
+    props.socket.emit("accept:invitation", props.userFrom.id);
+    props.setIsModalWannaPlay(!props.isModalWannaPlay);
+    props.setIsModalOnline(false);
   }
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose}>
@@ -36,5 +40,15 @@ const ModalWannaPlay = (props) => {
     </Modal>
   );
 };
-
-export default ModalWannaPlay;
+const mapStateToProps = (state) => {
+  return {
+    you: state.you,
+    userFrom: state.userFrom,
+    isModalWannaPlay: state.isModalWannaPlay,
+  };
+};
+const mapDispatchToProps = {
+  setIsModalWannaPlay,
+  setIsModalOnline,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ModalWannaPlay);

@@ -23,7 +23,9 @@ const initialState = {
   isModalOnline: false,
   isModalWannaPlay: false,
   isLogged: false,
-  usersOnline: { you: "", users: [] },
+  usersOnline: [],
+  you: "",
+  room: "",
   userFrom: { username: "", id: "" },
   isPlayingOnline: false,
 };
