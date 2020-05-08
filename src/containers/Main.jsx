@@ -78,7 +78,6 @@ const Main = ({
     if (winner == "User") setWinnerPhrase("You Win");
 
     if (winner == "Computer") setWinnerPhrase("You Lose");
-    console.log(isPlayingOnline);
   });
   useEffect(() => {
     socket.on("invitation", (userFrom) => {

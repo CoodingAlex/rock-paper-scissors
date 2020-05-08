@@ -30,8 +30,16 @@ const initialState = {
   isPlayingOnline: false,
 };
 const store = createStore(reducer, initialState);
-const ENDPOINT = "http://192.168.0.19:3001/";
-const socket = socketIOClient(ENDPOINT);
+let socket;
+if (process.env.NODE_ENV === "development") {
+  const ENDPOINT = "https://rock-paper-scissorsapi.herokuapp.com/";
+  socket = socketIOClient(ENDPOINT);
+}
+if (process.env.NODE_ENV === "production") {
+  const ENDPOINT = process.env.API_URL;
+  socket = socketIOClient(ENDPOINT);
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <Main socket={socket} />
