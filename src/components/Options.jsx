@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { setIsPlayingOnline } from "../actions";
+import { setIsPlayingOnline, setWinnerPhrase } from "../actions";
 import "../assets/styles/Options.css";
 import "../assets/styles/Game.css";
 import Option from "./Option";
@@ -27,6 +27,7 @@ const Options = (props) => {
                 props.setLosed(props.losed + 1);
               }
               props.setIsPlayingOnline(false);
+              props.setWinnerPhrase("");
             }}
             className="Play__Again__Button"
           >
@@ -52,6 +53,7 @@ const Options = (props) => {
 };
 const mapDispatchToProps = {
   setIsPlayingOnline,
+  setWinnerPhrase,
 };
 export default connect(null, mapDispatchToProps)(Options);
 
